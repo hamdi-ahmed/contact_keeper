@@ -1,12 +1,28 @@
 // Modules
 const express = require('express')
 const router = express.Router()
+
+// Middleware
+const auth = require('../middleware/auth')
+
 const { check, validationResult } = require('express-validator')
 const bcrypt = require('bcryptjs')
 
 // Models
 const User = require('../models/userModel')
 const generateToken = require('../util/token')
+
+// @route     GET api/auth
+// @desc      Get User Data
+// @access    Private
+router.get('/', auth, async (req, res) => {
+	try {
+		const user = await User.findById(req.user.id).select('-password')
+		res.json(user)
+	} catch (err) {
+		res.status(400).send('Not authorized')
+	}
+})
 
 // @route     POST api/auth
 // @desc      Login
