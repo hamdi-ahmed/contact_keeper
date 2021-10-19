@@ -5,11 +5,11 @@ const dbConnect = require('./config/db')
 require('dotenv').config()
 const app = express()
 
-//Let user to enter data in body as string
-app.use(express.json())
-
 // DB Connection
 dbConnect()
+
+// Middleware
+app.use(express.json({ extended: false }))
 
 // Routes
 app.use('/api/auth', require('./routes/authRoute'))
