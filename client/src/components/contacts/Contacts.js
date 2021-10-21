@@ -6,11 +6,11 @@ const Contacts = () => {
 	// Context
 	const contactContext = useContext(ContactContext)
 	const { contacts } = contactContext
-
+	//console.log(contacts)
 	return (
 		<Fragment>
 			{contacts.map((contact) => (
-				<ContactItem contact={contact} key={contact.id} />
+				<ContactItem key={contact.id} contact={contact} />
 			))}
 		</Fragment>
 	)
