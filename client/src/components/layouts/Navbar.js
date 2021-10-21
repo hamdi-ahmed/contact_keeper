@@ -5,7 +5,7 @@ const Navbar = () => {
 	return (
 		<nav className="navbar bg-primary">
 			<h1>
-				<i class="fa-solid fa-id-card-clip"></i> Contact Keeper
+				<i className="fa-solid fa-id-card-clip"></i> Contact Keeper
 			</h1>
 			<ul>
 				<li>

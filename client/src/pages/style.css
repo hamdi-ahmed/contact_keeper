@@ -1,0 +1,12 @@
+.home {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 2rem;
+}
+
+/* Media */
+@media (max-width: 768px) {
+	.home {
+		display: block;
+	}
+}
