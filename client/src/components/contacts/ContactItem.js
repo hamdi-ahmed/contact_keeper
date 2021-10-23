@@ -13,10 +13,6 @@ const ContactItem = ({ contact }) => {
 		clearCurrent()
 	}
 
-	console.log(contact)
-
-	//console.log(uuidv4())
-
 	// Edit
 	const onEdit = () => {
 		setCurrent(contact)
