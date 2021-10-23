@@ -10,8 +10,12 @@ const ContactItem = ({ contact }) => {
 	// Delete Contact
 	const onDelete = () => {
 		deleteContact(id)
-		//clearCurrent()
+		clearCurrent()
 	}
+
+	console.log(contact)
+
+	//console.log(uuidv4())
 
 	// Edit
 	const onEdit = () => {
@@ -28,7 +32,7 @@ const ContactItem = ({ contact }) => {
 						type === 'personal' ? 'badge-primary' : 'badge-success'
 					}`}
 				>
-					{type}
+					{type.charAt(0).toUpperCase() + type.slice(1)}
 				</span>
 			</h3>
 			<ul>

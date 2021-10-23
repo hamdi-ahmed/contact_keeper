@@ -19,7 +19,7 @@ const Form = () => {
 	const onChange = (e) =>
 		setContact({ ...contact, [e.target.name]: e.target.value })
 
-	console.log(contact)
+	//console.log(contact)
 
 	// When Page Loaded
 	useEffect(() => {
