@@ -44,6 +44,8 @@ const Register = () => {
 	useEffect(() => {
 		if (error) {
 			setAlert(error, 'danger')
+			// eslint-disable-next-line
+
 			clearError()
 			// eslint-disable-next-line
 		}

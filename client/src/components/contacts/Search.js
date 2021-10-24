@@ -1,10 +1,10 @@
-import React, { useRef, useState, useContext } from 'react'
+import React, { useRef, useContext } from 'react'
 import ContactContext from '../../context/contactContext'
 
 const Search = () => {
 	// Context
 	const contactContext = useContext(ContactContext)
-	const { filterContact, clearFilter, filtered } = contactContext
+	const { filterContact, clearFilter } = contactContext
 
 	// State
 	const text = useRef('')

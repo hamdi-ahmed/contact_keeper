@@ -1,11 +1,15 @@
 import React, { Fragment, useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import AuthContext from '../../context/auth/authContext'
+import ContactContext from '../../context/contactContext'
 
 const Navbar = () => {
 	// Context
 	const authContext = useContext(AuthContext)
 	const { user, loadUser, logout, isAuthenticated } = authContext
+
+	const contactContext = useContext(ContactContext)
+	const { clearContacts } = contactContext
 
 	useEffect(() => {
 		loadUser()
@@ -15,6 +19,7 @@ const Navbar = () => {
 	// Logout
 	const onLogOut = () => {
 		logout()
+		clearContacts()
 	}
 
 	return (
