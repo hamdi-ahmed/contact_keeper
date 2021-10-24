@@ -38,6 +38,7 @@ router.post(
 				name,
 				email,
 				password,
+				//token: generateToken(user._id),
 			})
 
 			const salt = await bcrypt.genSalt(10)

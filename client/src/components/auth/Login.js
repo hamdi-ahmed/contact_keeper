@@ -1,14 +1,24 @@
-import React, { useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
+import AlertContext from '../../context/alert/AlertState'
+import AuthContext from '../../context/auth/authContext'
 
 const Login = () => {
+	// Router
+	const history = useHistory()
+
+	// Context
+	const authContext = useContext(AuthContext)
+	const { error, clearError, isAuthenticated, login } = authContext
+	const alertContext = useContext(AlertContext)
+	const { setAlert } = alertContext
+
 	// State
 	const [formData, setFormData] = useState({
-		name: '',
 		email: '',
 		password: '',
-		cPassword: '',
 	})
-	const { name, email, password, cPassword } = formData
+	const { email, password } = formData
 
 	// Input
 	const onChange = (e) => {
@@ -18,8 +28,20 @@ const Login = () => {
 	// Form Event
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		console.log(formData)
+		login({ email, password })
 	}
+
+	// Error
+	useEffect(() => {
+		if (error) {
+			setAlert(error, 'danger')
+			clearError()
+			// eslint-disable-next-line
+		}
+		if (isAuthenticated) {
+			history.push('/')
+		}
+	}, [error, isAuthenticated, history])
 
 	return (
 		<div className="form-container">

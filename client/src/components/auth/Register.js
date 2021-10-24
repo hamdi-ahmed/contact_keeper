@@ -1,8 +1,15 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import AlertContext from '../../context/alert/AlertState'
+import AuthContext from '../../context/auth/authContext'
 
 const Register = () => {
+	// Router
+	const history = useHistory()
+
 	// Context
+	const authContext = useContext(AuthContext)
+	const { register, error, clearError, isAuthenticated } = authContext
 	const alertContext = useContext(AlertContext)
 	const { setAlert } = alertContext
 
@@ -28,9 +35,22 @@ const Register = () => {
 		} else if (password !== cPassword) {
 			setAlert("Password and Confirm Password doesn't match", 'danger')
 		} else {
-			console.log('User', formData)
+			register({ name, email, password })
+			//history.push('/')
 		}
 	}
+
+	// Error
+	useEffect(() => {
+		if (error) {
+			setAlert(error, 'danger')
+			clearError()
+			// eslint-disable-next-line
+		}
+		if (isAuthenticated) {
+			history.push('/')
+		}
+	}, [error, isAuthenticated, history])
 
 	return (
 		<div className="form-container">
