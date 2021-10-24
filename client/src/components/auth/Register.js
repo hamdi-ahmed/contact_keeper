@@ -44,14 +44,13 @@ const Register = () => {
 	useEffect(() => {
 		if (error) {
 			setAlert(error, 'danger')
-			// eslint-disable-next-line
 
 			clearError()
-			// eslint-disable-next-line
 		}
 		if (isAuthenticated) {
 			history.push('/')
 		}
+		// eslint-disable-next-line
 	}, [error, isAuthenticated, history])
 
 	return (

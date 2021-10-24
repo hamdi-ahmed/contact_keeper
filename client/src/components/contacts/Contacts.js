@@ -1,42 +1,50 @@
 import React, { Fragment, useContext, useEffect } from 'react'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
-import ContactContext from '../../context/contactContext'
-import Spinner from '../layouts/Spinner'
 import ContactItem from './ContactItem'
+import Spinner from '../layouts/Spinner'
+import ContactContext from '../../context/contactContext'
 
 const Contacts = () => {
-	// Load Data
+	const contactContext = useContext(ContactContext)
+
+	const { contacts, filtered, getContacts, loading } = contactContext
+
 	useEffect(() => {
 		getContacts()
 		// eslint-disable-next-line
 	}, [])
 
-	// Context
-	const contactContext = useContext(ContactContext)
-	const { contacts, filtered, getContacts, loading } = contactContext
-
 	if (contacts !== null && contacts.length === 0 && !loading) {
-		return <h4>You Can Add Your Own Contacts and Save Them.</h4>
+		return <h4>Please add a contact</h4>
 	}
 
-	//console.log(contacts)
-	return loading ? (
-		<Spinner />
-	) : (
+	return (
 		<Fragment>
-			<TransitionGroup>
-				{filtered !== null && filtered.length > 0
-					? filtered.map((contact) => (
-							<CSSTransition key={contact.id} timeout={500} classNames="item">
-								<ContactItem key={contact.id} contact={contact} />
-							</CSSTransition>
-					  ))
-					: contacts.map((contact) => (
-							<CSSTransition key={contact.id} timeout={500} classNames="item">
-								<ContactItem key={contact.id} contact={contact} />
-							</CSSTransition>
-					  ))}
-			</TransitionGroup>
+			{contacts !== null && !loading ? (
+				<TransitionGroup>
+					{filtered !== null
+						? filtered.map((contact) => (
+								<CSSTransition
+									key={contact._id}
+									timeout={500}
+									classNames="item"
+								>
+									<ContactItem contact={contact} />
+								</CSSTransition>
+						  ))
+						: contacts.map((contact) => (
+								<CSSTransition
+									key={contact._id}
+									timeout={500}
+									classNames="item"
+								>
+									<ContactItem contact={contact} />
+								</CSSTransition>
+						  ))}
+				</TransitionGroup>
+			) : (
+				<Spinner />
+			)}
 		</Fragment>
 	)
 }
